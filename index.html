@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Clone</title>
+    <style>
+        /* Reset and Basic Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: #fafafa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header Styles */
+        header {
+            background: white;
+            border-bottom: 1px solid #e6e6e6;
+            width: 100%;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 935px;
+            padding: 0 20px;
+        }
+
+        .logo img {
+            height: 29px;
+        }
+
+        .search-bar input {
+            padding: 8px;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            background: #fafafa;
+            text-align: center;
+        }
+
+        .icons img {
+            height: 24px;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        /* Main Content Styles */
+        main {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            max-width: 935px;
+            margin-top: 30px;
+        }
+
+        .feed {
+            width: 614px;
+        }
+
+        .story-container {
+            display: flex;
+            align-items: center;
+            padding: 16px 0;
+            overflow-x: auto;
+            background: white;
+            border: 1px solid #e6e6e6;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        .story {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 8px;
+            cursor: pointer;
+        }
+
+        .story img {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            padding: 2px;
+            border: 2px solid #e1306c;
+        }
+
+        .story span {
+            margin-top: 5px;
+            font-size: 12px;
+        }
+
+        .post {
+            background: white;
+            border: 1px solid #e6e6e6;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .post-header img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .post-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .post-actions {
+            display: flex;
+            padding: 10px 16px;
+        }
+
+        .post-actions img {
+            height: 24px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        .post-actions .like-button{
+            transition: transform 0.1s ease;
+        }
+        .post-actions .like-button.liked {
+            transform: scale(1.2);
+        }
+
+        .post-likes {
+            padding: 0 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .post-caption {
+            padding: 0 16px;
+            margin-bottom: 10px;
+        }
+
+        .post-caption span {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .post-comments {
+            padding: 0 16px;
+            color: #8e8e8e;
+            margin-bottom: 5px;
+        }
+
+        .post-time {
+            padding: 0 16px;
+            font-size: 10px;
+            color: #8e8e8e;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .add-comment {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            border-top: 1px solid #e6e6e6;
+        }
+
+        .add-comment input {
+            flex-grow: 1;
+            border: none;
+            outline: none;
+            padding: 8px;
+        }
+
+        .add-comment button {
+            border: none;
+            background: none;
+            color: #0095f6;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 293px;
+            margin-left: 30px;
+            position: sticky;
+            top: 80px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile img {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-info span:first-child {
+            font-weight: bold;
+        }
+
+        .profile-info span:last-child {
+            color: #8e8e8e;
+        }
+
+        .suggestions {
+            color: #8e8e8e;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .suggestion-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .suggestion-item img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .suggestion-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .suggestion-info span:first-child {
+            font-weight: bold;
+        }
+
+        .suggestion-info span:last-child {
+            color: #8e8e8e;
+        }
+
+        /* Footer Styles */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            color: #8e8e8e;
+            font-size: 12px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 950px) {
+            .sidebar {
+                display: none;
+            }
+
+            .feed {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header-content {
+                padding: 0 10px;
+            }
+
+            .search-bar {
+                display: none;
+            }
+
+            .icons img {
+                margin-left: 10px;
+            }
+
+            .story-container {
+                padding: 10px 0;
+            }
+
+            .story img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .post-header img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+        /* Hover and Focus States */
+        .icons img:hover, .post-actions img:hover, .add-comment button:hover {
+            opacity: 0.8;
+        }
+
+        .search-bar input:focus {
+            text-align: left;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="Instagram Logo">
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+            </div>
+            <div class="icons">
+                <img src="https://img.icons8.com/ios/50/000000/home--v1.png" alt="Home">
+                <img src="https://img.icons8.com/ios/50/000000/sent.png" alt="Messages">
+                <img src="https://img.icons8.com/ios/50/000000/plus-2-math.png" alt="Create">
+                <img src="https://img.icons8.com/ios/50/000000/compass.png" alt="Explore">
+                <img src="https://img.icons8.com/ios/50/000000/like--v1.png" alt="Notifications">
+                <img src="https://img.icons8.com/ios/50/000000/user-male-circle.png" alt="Profile">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="feed">
+            <div class="story-container">
+                <div class="story">
+                    <img src="https://picsum.photos/id/1005/56/56" alt="User Story">
+                    <span>user1</span>
+                </div>
+                <div class="story">
+                    <img src="https://picsum.photos/id/1010/56/56" alt="User Story">
+                    <span>user2</span>
+                </div>
+                <div class="story">
+                    <img src="https://picsum.photos/id/1015/56/56" alt="User Story">
+                    <span>user3</span>
+                </div>
+                <div class="story">
+                    <img src="https://picsum.photos/id/1020/56/56" alt="User Story">
+                    <span>user4</span>
+                </div>
+                <div class="story">
+                    <img src="https://picsum.photos/id/1025/56/56" alt="User Story">
+                    <span>user5</span>
+                </div>
+                <div class="story">
+                    <img src="https://picsum.photos/id/1030/56/56" alt="User Story">
+                    <span>user6</span>
+                </div>
+                
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <img src="https://picsum.photos/id/237/32/32" alt="User Profile">
+                    <span>user1</span>
+                </div>
+                <div class="post-image">
+                    <img src="https://picsum.photos/id/237/614/400" alt="Post Image">
+                </div>
+                <div class="post-actions">
+                    <img class = "like-button" src="https://img.icons8.com/ios/50/000000/like--v1.png" alt="Like">
+                    <img src="https://img.icons8.com/ios/50/000000/speech-bubble.png" alt="Comment">
+                    <img src="https://img.icons8.com/ios/50/000000/sent.png" alt="Share">
+                </div>
+                <div class="post-likes">
+                    1,234 likes
+                </div>
+                <div class="post-caption">
+                    <span>user1</span> This is a sample caption for the post.
+                </div>
+                <div class="post-comments">
+                    View all 24 comments
+                </div>
+                <div class="post-time">
+                    2 hours ago
+                </div>
+                <div class="add-comment">
+                    <input type="text" placeholder="Add a comment...">
+                    <button>Post</button>
+                </div>
+            </div>
+        </div>
+
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="https://picsum.photos/id/1/56/56" alt="Your Profile">
+                <div class="profile-info">
+                    <span>yourusername</span>
+                    <span>Your Name</span>
+                </div>
+            </div>
+            <div class="suggestions">
+                Suggestions For You
+            </div>
+            <div class="suggestion-item">
+                <img src="https://picsum.photos/id/2/32/32" alt="Suggestion">
+                <div class="suggestion-info">
+                    <span>user2</span>
+                    <span>Follows you</span>
+                </div>
+            </div>
+            <div class="suggestion-item">
+                <img src="https://picsum.photos/id/3/32/32" alt="Suggestion">
+                <div class="suggestion-info">
+                    <span>user3</span>
+                    <span>Suggested for you</span>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        &copy; 2024 Instagram Clone from Meta
+    </footer>
+    <script>
+    document.querySelectorAll('.like-button').forEach(button => {
+    button.addEventListener('click', function() {
+        this.classList.toggle('liked');
+        
+    });
+});
+    </script>
+</body>
+</html>
